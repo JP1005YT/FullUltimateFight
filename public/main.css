@@ -1,0 +1,220 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "PS2P";
+    user-select: none;
+}
+body{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: #EFEFEF;
+    overflow: hidden;
+}
+.BoxOfScreens{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 600px;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+    background: #3454D1;
+    div{
+        width: 100%;
+        height: 100%;
+        border-radius: 25px;
+        display: none;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        button{
+            transition: 1000ms;
+            cursor: pointer;
+            width: 250px;
+            background: #fff;
+            border: none;
+            font-size:20px;
+            padding: 20px;
+            border-radius: 25px;
+            box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+            animation: sombraOut 500ms ease;
+            &:hover{
+                animation: sombraIn 500ms ease;
+                box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3) inset;
+                /* font-size: 25px; */
+            }
+        }
+        select{
+            font-size: 22px;
+            padding: 10px;
+            outline: none;
+            option{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+        input{
+            font-size: 18px;
+            padding: 10px;
+            outline: none;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3)
+        }
+    }
+    .ativo{
+        display: flex;
+    }
+    .ButtonX{
+        display: flex;
+        box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+        animation: sombraOut 500ms ease;
+        transition: 200ms;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+        width: 50px;
+        height: 50px;
+        margin: 20px;
+        border-radius: 20px;
+        background: white;
+        font-size: 40px;
+        top: 0;
+        left: 0;
+        &:hover{
+            animation: sombraIn 500ms ease;
+            box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3) inset;
+            font-size: 35px;
+        }
+        &.ativo{
+            display: flex;
+        }
+    }
+}
+.title span:nth-child(2n + 1){
+    color: #FF0000;
+}
+.title span:nth-child(3n + 1){
+    color: #FF7F00;
+}
+.title span:nth-child(4n + 1){
+    color: #FFFF00;
+}
+.title span:nth-child(5n + 1){
+    color: #00FF00;
+}
+.title span:nth-child(6n + 1){
+    color: #00ffff;
+}
+.title span:nth-child(7n + 1){
+    color: #0000FF;
+}
+.title span:nth-child(8n + 1){
+    color: #8b00ff;
+}
+.title{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 1500px;
+    font-size: 50px;
+    animation: titulo 2s;
+    span{
+        cursor: pointer;
+        transition: 500ms;
+    }
+    span:hover{
+        animation: shakeOff 1s infinite;
+        font-size: 80px;
+    }
+}
+
+/* Lobby */
+
+.Lobby{
+    section{
+        display: flex;
+        justify-content:space-around;
+        flex-direction: column;
+        align-items: center;
+        width: 1400px;
+        height: 600px;
+        background: #3454D1;
+        padding: 30px;
+        border-radius: 25px;
+        span{
+            display: flex;
+            justify-content: center;
+            align-items: center;    
+            width: 100%;
+            height: 45%;
+            background: #273f9e;
+            font-size: 70px;
+            border-radius: 25px;
+        }
+    }
+}
+
+
+@keyframes shakeOff {
+    0%{
+        transform: rotateZ(10deg);
+    }
+    50%{
+        transform: rotateZ(-10deg);
+    }
+    100%{
+        transform: rotateZ(10deg);
+    }
+}
+@keyframes titulo{
+    0%{
+        width: 300%;
+    }
+    100%{
+        width: 1500px;
+    }
+}
+@keyframes sombraIn {
+    0%{
+        box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3),
+        0px 0px 0px 0px rgba(0, 0, 0, 0.3) inset;
+    }
+    50%{
+        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3),
+        0px 0px 0px 0px rgba(0, 0, 0, 0.3) inset;
+    }
+    100%{
+        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3),
+        2px 2px 5px 2px rgba(0, 0, 0, 0.3) inset;
+    }
+}
+@keyframes sombraOut {
+    0%{
+        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3),
+        2px 2px 5px 2px rgba(0, 0, 0, 0.3) inset;
+    }
+    50%{
+        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3),
+        0px 0px 0px 0px rgba(0, 0, 0, 0.3) inset;
+    }
+    100%{
+        box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3),
+        0px 0px 0px 0px rgba(0, 0, 0, 0.3) inset;
+    }
+}
+@font-face {
+    font-family: 'PS2P';
+    src: url('./styles/fonts/PressStart2P.ttf');
+}

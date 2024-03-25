@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Battle | Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <h1 class="title">ULTIMATE BATTLE MASTERS</h1>
+    <section class="BoxOfScreens">
+        <div class="screen0 ativo">
+            <button onclick="TrocaTela(1)">Jogar</button>
+        </div>
+        <div class="screen1">
+            <span class="ButtonX" onclick="TrocaTela(0)">
+                <i class='bx bxs-left-arrow'></i>
+            </span>
+            <button to="screen2" onclick="TrocaTela(2)">Sigleplayer</button>
+            <button to="screen3" onclick="TrocaTela(5)">Multiplayer</button>
+        </div>
+        <div class="screen2">
+            <span class="ButtonX" onclick="TrocaTela(1)">
+                <i class='bx bxs-left-arrow'></i>
+            </span>
+            <select>
+                <option>Easy</option>
+                <option>Medium</option>
+                <option>Hard</option>
+            </select>
+            <button>Entrar</button>
+        </div>
+        <div class="screen5">
+            <span class="ButtonX" onclick="TrocaTela(1)">
+                <i class='bx bxs-left-arrow'></i>
+            </span>
+            <input placeholder="USERNAME" type="text">
+            <button onclick="TrocaTela(3)">OK</button>
+        </div>
+        <div class="screen3">
+            <span class="ButtonX" onclick="TrocaTela(1)">
+                <i class='bx bxs-left-arrow'></i>
+            </span>
+            <button onclick="CreateRoom()">Criar Sala</button>
+            <button onclick="TrocaTela(4)">Entrar em uma Sala</button>
+        </div>
+        <div class="screen4">
+            <span class="ButtonX" onclick="TrocaTela(3)">
+                <i class='bx bxs-left-arrow'></i>
+            </span>
+            <input placeholder="ID DA SALA" type="number">
+            <button>Entrar</button>
+        </div>
+    </section>
+    <script src="./scripts/menu.js"></script>
+    <script>
+        function CreateRoom(){
+            fetch("./execute/createRoom",{
+                "method" : "POST"
+            }).then(res => res.json())
+        }
+    </script>
+</body>
+</html>
