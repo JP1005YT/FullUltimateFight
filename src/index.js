@@ -2,10 +2,23 @@ import express from "express";
 import path from "path"
 import { v4 } from "uuid";
 import bodyParser from "body-parser";
+import { Server as socketIO } from 'socket.io';
+import http from "http";
+
 const app = express()
+const server = http.createServer(app)
+const io = new socketIO(server)
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static('public'))
+
+io.on("connection",(socket) => {
+    console.log(`usuario ${socket.id} foi conectado!`)
+    socket.on("lobbyUpdate",(lobbyId,data) => {
+        l
+    })
+})
 
 let lobbyIds = {}
 
@@ -25,7 +38,7 @@ app.get("/lobby",(req,res) => {
     }
 })
 
-app.get("/lobby/getPlayers",(req,res) => {
+app.post("/lobby/getPlayers",(req,res) => {
     const ID = req.query.id
     const ListIDs = Object.keys(lobbyIds)
     ListIDs.forEach(IDofList =>{
@@ -52,6 +65,6 @@ app.post("/execute/:command",(req,res) => {
 })
 
 
-app.listen("3000",() => {
+server.listen("3000",() => {
     console.log('Server Open http://localhost:3000/')
 })
