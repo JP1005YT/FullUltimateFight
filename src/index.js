@@ -13,14 +13,22 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
+let lobbyIds = {}
+
 io.on("connection",(socket) => {
-    console.log(`usuario ${socket.id} foi conectado!`)
-    socket.on("lobbyUpdate",(lobbyId,data) => {
-        l
+    console.log(`Usuario ${socket.id} foi conectado!`)
+    const ListIDs = Object.keys(lobbyIds)
+    ListIDs.forEach(IDofList =>{
+        socket.on(IDofList,(data)=>{
+            lobbyIds[data.lobbyId][0]['socketId'] = socket.id
+            console.log(`Usuario ${data.user} conectado ao lobby ${data.lobbyId}`)
+        })
+    })
+    socket.on("disconnect",()=>{
+        console.log(`Usuario ${socket.id} foi desconectado!`)
     })
 })
 
-let lobbyIds = {}
 
 app.get("/lobby",(req,res) => {
     const ID = req.query.id
@@ -57,13 +65,19 @@ app.post("/execute/:command",(req,res) => {
         case "createRoom":
             const idNew = v4()
             lobbyIds[idNew] = []
-            lobbyIds[idNew].push(HostName)
+            const dataforList = {
+                hostname : HostName,
+            }
+            lobbyIds[idNew].push(dataforList)
             res.send({"Room": idNew})
             break;
     }
     console.log(lobbyIds)
 })
 
+app.get("/show",(req,res) => {
+    res.send(lobbyIds)
+})
 
 server.listen("3000",() => {
     console.log('Server Open http://localhost:3000/')
