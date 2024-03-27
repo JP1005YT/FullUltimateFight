@@ -56,13 +56,20 @@
     </section>
     <script src="./scripts/menu.js"></script>
     <script>
-        const playerName = document.querySelector("#playerName")
-        function CreateRoom(){
-            fetch("./execute/createRoom",{
-                headers: {"Content-Type": "application/json"},
-                "method" : "POST",
-                "body" : JSON.stringify({playerName : playerName.value})
-            }).then(res => res.json())
+        const playerName = document.querySelector("#playerName");
+
+        function CreateRoom() {
+            fetch("./execute/createRoom", {
+                headers: { "Content-Type": "application/json" },
+                method: "POST",
+                body: JSON.stringify({ playerName: playerName.value })
+            })
+            .then(res => res.json()) // Transforma a resposta em JSON
+            .then(data => SendLobby(data.Room)) // Chama a função show com os dados JSON
+            .catch(error => console.error('Erro:', error)); // Tratamento de erros
+        }
+        function SendLobby(LID){
+            window.location.href = `./lobby?id=${LID}`
         }
     </script>
 </body>
