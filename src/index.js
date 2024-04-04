@@ -4,6 +4,7 @@ import { v4 } from "uuid";
 import bodyParser from "body-parser";
 import { Server as socketIO } from 'socket.io';
 import http from "http";
+import fs from "fs"
 
 const app = express()
 const server = http.createServer(app)
@@ -21,14 +22,20 @@ io.on("connection",(socket) => {
     ListIDs.forEach(IDofList =>{
         socket.on(IDofList,(data)=>{
             lobbyIds[data.lobbyId][0]['socketId'] = socket.id
-            console.log(`Usuario ${data.user} conectado ao lobby ${data.lobbyId}`)
+            console.log(`Usuario ${lobbyIds[data.lobbyId][0]['hostname']} conectado ao lobby ${data.lobbyId}`)
         })
     })
+
     socket.on("disconnect",()=>{
+        const ListIDs = Object.keys(lobbyIds)
+        ListIDs.forEach((IDofList) =>{
+            if(lobbyIds[IDofList][0].socketId === socket.id){
+                console.log("Fechando Sala!")
+            }
+        })
         console.log(`Usuario ${socket.id} foi desconectado!`)
     })
 })
-
 
 app.get("/lobby",(req,res) => {
     const ID = req.query.id
